@@ -37,5 +37,9 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
     train_section = models.ForeignKey(TrainSection, on_delete=models.PROTECT)
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def __str__(self):
         return self.full_name
