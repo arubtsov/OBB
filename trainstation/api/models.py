@@ -18,7 +18,7 @@ class Train(models.Model):
 class Platform(models.Model):
     name = models.CharField(max_length=30)
     train = models.ForeignKey(Train, on_delete=models.SET_NULL)
-    station = models.ForeignKey(TrainStation, on_delete=models.SET_NULL)
+    station = models.ForeignKey(TrainStation, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
