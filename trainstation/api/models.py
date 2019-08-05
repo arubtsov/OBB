@@ -15,7 +15,7 @@ class TrainStation(NamedEntity):
     pass
 
 
-class Train(NamedEntity):
+class Train(NamedEntity):    
     pass
 
 
@@ -26,6 +26,12 @@ class Platform(NamedEntity):
 
 class TrainSection(NamedEntity):
     train = models.ForeignKey(Train, on_delete=models.SET_NULL)
+    order = models.PositiveSmallIntegerField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['train', 'order'], name='unique_section_position')
+        ]
 
 
 class Person(models.Model):
