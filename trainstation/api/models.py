@@ -25,7 +25,7 @@ class Platform(NamedEntity):
 
 
 class TrainSection(NamedEntity):
-    train = models.ForeignKey(Train, on_delete=models.PROTECT)
+    train = models.ForeignKey(Train, on_delete=models.PROTECT, related_name='sections')
     order = models.PositiveSmallIntegerField()
 
     class Meta:
@@ -37,7 +37,7 @@ class TrainSection(NamedEntity):
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    train_section = models.ForeignKey(TrainSection, on_delete=models.PROTECT)
+    train_section = models.ForeignKey(TrainSection, on_delete=models.PROTECT, related_name='passengers')
 
     @property
     def full_name(self):
