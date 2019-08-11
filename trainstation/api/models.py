@@ -16,7 +16,14 @@ class TrainStation(NamedEntity):
 
 
 class Train(NamedEntity):    
-    pass
+    def get_passengers(self):
+        passengers = []
+
+        for section in self.sections.all():
+            passengers.extend(section.passengers.all())
+
+        return passengers
+
 
 
 class Platform(NamedEntity):
