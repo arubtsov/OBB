@@ -20,12 +20,12 @@ class Train(NamedEntity):
 
 
 class Platform(NamedEntity):
-    train = models.OneToOneField(Train, on_delete=models.SET_NULL)
+    train = models.OneToOneField(Train, null=True, on_delete=models.SET_NULL)
     station = models.ForeignKey(TrainStation, on_delete=models.CASCADE)
 
 
 class TrainSection(NamedEntity):
-    train = models.ForeignKey(Train, on_delete=models.SET_NULL)
+    train = models.ForeignKey(Train, on_delete=models.PROTECT)
     order = models.PositiveSmallIntegerField()
 
     class Meta:
