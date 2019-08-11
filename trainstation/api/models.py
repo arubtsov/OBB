@@ -37,7 +37,7 @@ class TrainSection(NamedEntity):
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    train_section = models.ForeignKey(TrainSection, on_delete=models.PROTECT, related_name='passengers')
+    train_section = models.ForeignKey(TrainSection, null=True, blank=True, on_delete=models.PROTECT, related_name='passengers')
 
     @property
     def full_name(self):
