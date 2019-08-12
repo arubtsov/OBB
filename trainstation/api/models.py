@@ -19,7 +19,7 @@ class Train(NamedEntity):
     def get_passengers(self):
         passengers = []
 
-        for section in self.sections.all():
+        for section in self.sections.all().prefetch_related('passengers'):
             passengers.extend(section.passengers.all())
 
         return passengers
