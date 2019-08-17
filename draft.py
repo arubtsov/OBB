@@ -35,48 +35,49 @@ class Train:
         self.name = name
         self.head = None
 
+    def __iter__(self):
+        current = self.head
+
+        while current is not None:            
+            yield current
+            current = current.next
+
     def dock_section(self, section):
-        if self.head is None:
-            self.head = section
-        else:
-            last_section = self.head
+        last_section = None
 
-            while last_section.next is not None:
-                last_section = last_section.next
+        for docked_section in self:
+            last_section = docked_section
 
+        if last_section is not None:
             last_section.dock_next_section(section)
+        else:
+            self.head = section
 
     def print_sections(self):
         section_names = []
-        last_section = self.head
-
-        while last_section is not None:
-            section_names.append(last_section.name)
-            last_section = last_section.next
+        
+        for section in self:
+            section_names.append(section.name)
 
         print(' - '.join(section_names))
 
     def show_current_passengers(self):
-        passenger_names = []
-        last_section = self.head
+        passenger_names = []        
 
-        while last_section is not None:
-            passenger_names.extend(last_section.get_passangers_names())
-            last_section = last_section.next
+        for section in self:
+            passenger_names.extend(section.get_passangers_names())
 
         print(', '.join(passenger_names))
 
         return passenger_names
 
     def count_passengers(self):
-        count = 0
-        last_section = self.head
+        count = 0        
 
-        while last_section is not None:
-            count += last_section.get_passangers_count()
-            last_section = last_section.next
+        for section in self:
+            count += section.get_passangers_count()
 
-        print('Passenger count: {}'.format(count))
+        print('Passengers count: {}'.format(count))
 
         return count
 
